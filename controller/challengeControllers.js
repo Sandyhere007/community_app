@@ -9,16 +9,7 @@ export const addNew = async (req, res) => {
             question3: { questionText: questionText3, tags: tags3, link1: link1_3, link2: link2_3, isComplete: isComplete3 },
             question4: { questionText: questionText4, tags: tags4, link1: link1_4, link2: link2_4, isComplete: isComplete4 }
         } = req.body;
-
-        // const newChallenge = new Challenge({
-        //     date,
-        //     question1: { questionText: questionText1, tags: tags1, link1: link1_1, link2: link2_1, isComplete: isComplete1 },
-        //     question2: { questionText: questionText2, tags: tags2, link1: link1_2, link2: link2_2, isComplete: isComplete2 },
-        //     question3: { questionText: questionText3, tags: tags3, link1: link1_3, link2: link2_3, isComplete: isComplete3 },
-        //     question4: { questionText: questionText4, tags: tags4, link1: link1_4, link2: link2_4, isComplete: isComplete4 }
-        // });
-
-        // const savedChallenge = await newChallenge.save();
+        
         const savedChallenge = await Challenge.create({
             created,
             question1: { questionText: questionText1, tags: tags1, link1: link1_1, link2: link2_1, isComplete: isComplete1 },

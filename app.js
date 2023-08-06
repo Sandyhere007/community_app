@@ -1,16 +1,18 @@
 import { config } from "dotenv";
 import express from "express";
 import challengeRouter from "./routes/challengeRouter.js";
-import { errorMiddleware } from "./utils/errorHandler.js";
+import { errorMiddleware } from "./middleware/errorHandler.js";
 // import { sendCookie } from "./utils/sendCookie.js";
 import { userRouter } from "./routes/userRouter.js";
+import cookieParser from "cookie-parser";
 
 
 export const app = express();
 
 app.use(express.json())
-app.use(challengeRouter)
-app.use(userRouter)
+app.use(cookieParser());
+app.use(challengeRouter);
+app.use(userRouter);
 config({
     path:"./data/config.env"
 })
