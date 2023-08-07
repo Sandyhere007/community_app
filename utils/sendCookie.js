@@ -9,6 +9,6 @@ export const sendCookie = (user,res,message,status=201) =>{
         secure : process.env.NODE_ENV==="Development" ? false : true,
     }).json({
         secure: true,
-        message,
+        message : message,
     })
 }
