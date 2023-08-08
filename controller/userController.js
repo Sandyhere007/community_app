@@ -6,11 +6,7 @@ import ErrorHandler from "../middleware/errorHandler.js";
 export const register = async (req, res, next) => {
     try {
         const { name, phone, email, password, cpassword } = req.body;
-        // if(  !name || !phone || !email || !password || !cpassword) return 
-        // res.status(422).json({
-        //     success : false,
-        //     message : "Please Fill all Fiels Correctly! "
-        // })
+       
         if(password !== cpassword ) return next(new ErrorHandler("Password and Confirm password do not match",422));
         let user = await User.findOne({ email });
         if (user) return next(new ErrorHandler("User Already Exists"), 422);
