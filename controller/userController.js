@@ -15,9 +15,9 @@ export const register = async (req, res, next) => {
         sendCookie(user, res, "User Registered Successfully");
     }
     catch (error) {
-        res.send(error.message)
+        next(error);
     }
-}
+};
 
 export const login = async (req, res, next) => {
     try {
@@ -32,19 +32,23 @@ export const login = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-}
+};
 export const getMyProfile = async (req, res) => {
     res.status(200).json({
         success: true,
-        user: res.user,
-    })
-    console.log(res.user);
-}
+        user: req.user,
+    });
+};
 export const logout = async (req, res) => {
-    res.status(404).cookie("token" , "", {expires : new Date(Date.now())})
+    res.status(200).cookie("token" , "", {
+        expires : new Date(Date.now()),
+        sameSite: process.env.NODE_ENV === "Develpoment" ? "lax" : "none",
+        secure: process.env.NODE_ENV === "Develpoment" ? false : true,
+    })
     .json({
         success: true,
         message:"Logout Successfull",
+        user :req.user,
     })
 
 }
