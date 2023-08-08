@@ -5,14 +5,16 @@ import ErrorHandler from "../middleware/errorHandler.js";
 
 export const register = async (req, res, next) => {
     try {
-        const { name, phone, email, password, cpassword } = req.body;
+        const { name, email, password } = req.body;
        
-        if(password !== cpassword ) return next(new ErrorHandler("Password and Confirm password do not match",422));
+        // if(password !== cpassword ) return next(new ErrorHandler("Password and Confirm password do not match",422));
         let user = await User.findOne({ email });
         if (user) return next(new ErrorHandler("User Already Exists"), 422);
         const hashedPassword = await bcrypt.hash(password, 10);
-        user = await User.create({ name, phone, email, password: hashedPassword })
+        user = await User.create({ name, email, password: hashedPassword })
         sendCookie(user, res, "User Registered Successfully");
+        console.log(user); 
+        console.log(token);
     }
     catch (error) {
         res.send(error.message)
