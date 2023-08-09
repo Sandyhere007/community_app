@@ -6,6 +6,6 @@ const challengeRouter = express.Router();
 
 
 challengeRouter.post("/addNew" , addNew)
-challengeRouter.post("/all" , all)
+challengeRouter.get("/all" , all)
 
 export default challengeRouter;
