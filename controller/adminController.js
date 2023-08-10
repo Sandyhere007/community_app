@@ -14,7 +14,7 @@ export const register  = async(req,res,next) =>{
     sendCookie(user,200,"Admin registered Successfully");
 
    } catch (error) {
-        next(error)    
+        next(new ErrorHandler("Some error Occured! Try Again later",500))    
    }
 }
 

@@ -15,8 +15,8 @@ export const register = async (req, res, next) => {
         sendCookie(user, res, "User Registered Successfully");
     }
     catch (error) {
-        next(error);
-        console.log(error);
+        next( new ErrorHandler( "Some error Occured ! try Again after some time ", 500));
+        
     }
 };
 
@@ -25,7 +25,7 @@ export const login = async (req, res, next) => {
         const { email, password } = req.body;
 
         const user = await User.findOne({ email });
-        if (!user) return next(new ErrorHandler("User Not Find Kindly Login First"));
+        if (!user) return next(new ErrorHandler("User Not Found Kindly Login First"));
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return next(new ErrorHandler("Incorrect Password Please Enter the correct Password"));
@@ -42,7 +42,7 @@ export const getMyProfile = async (req, res) => {
 };
 export const logout = async (req, res) => {
     res.status(200).cookie("token", "", {
-        expires: new Date(Date.now()),
+        expires: new Date(0),
         sameSite: process.env.NODE_ENV === "Develpoment" ? "lax" : "none",
         secure: process.env.NODE_ENV === "Develpoment" ? false : true,
     })
