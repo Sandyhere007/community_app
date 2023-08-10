@@ -7,7 +7,7 @@ export const register  = async(req,res,next) =>{
    try {
     const {name ,username ,  phone, email , password , userType } = req.body;
 
-    let user = await User.findOne({email, userType:"admin"});
+    let user = await User.findOne({email : email, userType:"admin"});
     if(user) return next(new ErrorHandler("Admin Already Registered", 400));
     const hashedPassword = await bcrypt.hash(password,10);
     user = await User.create({name ,username, phone , email ,password : hashedPassword , userType : "admin"});
