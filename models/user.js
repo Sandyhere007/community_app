@@ -5,6 +5,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    username :{
+        type : String,
+        required: true,
+        unique : true,
+    },
     phone: {
         type: Number,
         required: true,
@@ -17,11 +22,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    city:{
-        type :String,
-        require:true,
-
-    },
+   
     userType: {
         type: String,
         default: "user"
