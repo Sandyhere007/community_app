@@ -5,15 +5,28 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-       email: {
+    phone: {
+        type: Number,
+        required: true,
+    },
+    email: {
         type: String,
         unique: true,
     },
-        password: {
+    password: {
         type: String,
         required: true
     },
-   
-})
+    city:{
+        type :String,
+        require:true,
+
+    },
+    userType: {
+        type: String,
+        default: "user"
+    }
+
+})  
 
 export const User = mongoose.model("userData", userSchema);

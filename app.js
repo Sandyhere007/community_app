@@ -4,6 +4,7 @@ import challengeRouter from "./routes/challengeRouter.js";
 import { errorMiddleware } from "./middleware/errorHandler.js";
 // import { sendCookie } from "./utils/sendCookie.js";
 import  userRouter  from "./routes/userRouter.js";
+import adminRouter from "./routes/adminRouter.js";
 import cookieParser from "cookie-parser";
 import cors from 'cors';
 
@@ -23,6 +24,7 @@ app.use(
 );
 app.use("/challenge",challengeRouter);
 app.use("/user",userRouter);
+app.use("/admin",adminRouter);
 
 app.get("/",(req,res)=>{
     res.send("BELIEVE IN YOURSELF KING");
