@@ -1,9 +1,9 @@
-import bcrypt from 'bcrypt';
-import ErrorHandler from "../middleware/errorHandler.js";
 import { User } from "../models/user.js";
+import bcrypt from 'bcrypt';
 import { sendCookie } from '../utils/sendCookie.js';
+import ErrorHandler from "../middleware/errorHandler.js";
 
-export const register  = async(req,res) =>{
+export const register  = async(req,res,next) =>{
    try {
     const {name ,username ,  phone, email , password , userType } = req.body;
 
