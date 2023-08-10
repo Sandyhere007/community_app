@@ -7,10 +7,10 @@ export const register  = async(req,res,next) =>{
    try {
     const {name ,username ,  phone, email , password , userType } = req.body;
 
-    let user = await User.findOne({email : email, userType:"admin"});
-    if(user) return next(new ErrorHandler("Admin Already Registered", 400));
+    const  isMatch = await User.findOne({email, userType:"admin"});
+    if(isMatch) return next(new ErrorHandler("Admin Already Registered", 400));
     const hashedPassword = await bcrypt.hash(password,10);
-    user = await User.create({name ,username, phone , email ,password : hashedPassword , userType : "admin"});
+    const user = await User.create({name ,username, phone , email ,password : hashedPassword , userType : "admin"});
     sendCookie(user,200,"Admin registered Successfully");
 
    } catch (error) {
