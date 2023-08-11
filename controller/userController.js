@@ -41,15 +41,10 @@ export const getMyProfile = async (req, res) => {
     });
 };
 export const logout = async (req, res) => {
-    res.status(200).cookie("token", "", {
-        expires: new Date(Date.now() - 1000),
-        sameSite: process.env.NODE_ENV === "Development" ? "lax" : "none",
-        secure: process.env.NODE_ENV === "Development" ? false : true,
+    res.clearCookie("token",{path: '/'});
+    res.status(200).json({
+        success:true,
+        message: "Logout Done",
     })
-        .json({
-            success: true,
-            message: "Logout Successfull",
-            user: req.user,
-        })
 
 }
