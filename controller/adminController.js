@@ -10,8 +10,12 @@ export const register  = async(req,res,next) =>{
     const  isMatch = await User.findOne({email, userType:"admin"});
     if(isMatch) return next(new ErrorHandler("Admin Already Registered", 400));
     const hashedPassword = await bcrypt.hash(password,10);
-    const user = await User.create({name ,username, phone , email ,password : hashedPassword , userType : "admin"});
-    sendCookie(user,200,"Admin registered Successfully");
+    const admin  = await User.create({name ,username, phone , email ,password : hashedPassword , userType });
+    // sendCookie(admin,200,"Admin registered Successfully");
+    res.status(200).json({
+        succes: true,
+        message :"Admin created successfully!",
+    })
 
    } catch (error) {
         next(new ErrorHandler("Some error Occured! Try Again later",500))    

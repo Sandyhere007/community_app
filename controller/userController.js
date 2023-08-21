@@ -25,7 +25,7 @@ export const login = async (req, res, next) => {
         const { email, password } = req.body;
 
         const user = await User.findOne({ email });
-        if (!user) return next(new ErrorHandler("User Not Found Kindly Login First"));
+        if (!user) return next(new ErrorHandler("User Not Found Kindly Register First"));
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return next(new ErrorHandler("Incorrect Password Please Enter the correct Password"));

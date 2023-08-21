@@ -6,6 +6,12 @@ const challengeSchema = mongoose.Schema({
         default: new Date(Date.now()),
         unique: true,
     },
+    progress:{
+        type: Number,
+        default: 0,
+        max : [100],
+        min:[0],
+    },
     question1: {
         questionText: { type: String, required: true },
         tags: [{ type: String }],
