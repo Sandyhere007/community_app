@@ -1,17 +1,22 @@
 import { Blog } from "../models/blog.js";
 import path from "path";
 import fs from 'fs';
-
+import cloudinary from 'cloudinary';
 
 export const addBlog = async (req, res) => {
+  // const options = {
+  //   use_filename : true,
+  //   unique_filename: false,
+  //   overwrite: true,
+  // };
   const { originalname, filename } = req.file; 
- 
+ const result = cloudinary.v2.uploader.upload(req.file.path)
   const { title, summary, content ,author } = req.body;
  try {
   const blogData = await Blog.create({
     title : title,
     summary : summary,
-    blogImage: filename,
+    blogImage: (await result).secure_url,
     content : content,
     author : author,
   })
