@@ -11,11 +11,12 @@ export const addBlog = async (req, res) => {
   // };
   const { originalname, filename } = req.file; 
  const result = cloudinary.v2.uploader.upload(req.file.path)
-  const { title, summary, content ,author } = req.body;
+  const { title, summary, category, content ,author } = req.body;
  try {
   const blogData = await Blog.create({
     title : title,
     summary : summary,
+    category : category,
     blogImage: (await result).secure_url,
     content : content,
     author : author,
@@ -51,11 +52,12 @@ export const blogPost = async (req, res) => {
 }
 export const updatePost = async (req, res) => {
    const { originalname, filename } = req.file; 
-  const { title, summary, content ,author } = req.body;
+  const { title, summary, category, content ,author } = req.body;
  try {
   const blogData = await Blog.create({
     title : title,
     summary : summary,
+    category : category,
     blogImage: filename ? filename : res.data.blogImage ,
     content : content,
     author : author,
@@ -87,4 +89,11 @@ export const myBlog = async(req,res)=>{
     })
   }
 
+}
+export const category =async (req, res) =>{
+  const {category} =req.query ;  // query params
+ 
+    const categories = await Blog.find({category:`${category}`});
+
+    res.status(200).json(categories)
 }

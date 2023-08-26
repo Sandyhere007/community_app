@@ -1,5 +1,5 @@
 import express from "express";
-import { addBlog, allBlog, blogPost, myBlog, updatePost} from "../controller/blogController.js";
+import { addBlog, allBlog, blogPost, category, myBlog, updatePost} from "../controller/blogController.js";
 import multer from "multer";
 
 
@@ -13,6 +13,7 @@ blogRouter.get("/all" , allBlog);
 blogRouter.get("/blogpost/:id" , blogPost);
 blogRouter.put("/blogpost/:id" ,uploadMiddleware.single('file') , updatePost);
 blogRouter.get("/myblogs/:id" , myBlog);
+blogRouter.get("/by-category" , category);
 
 
 

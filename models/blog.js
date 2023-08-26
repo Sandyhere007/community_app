@@ -10,6 +10,10 @@ const blogSchema = new mongoose.Schema({
         type: String,
         required: [true, "Please Enter Summary"]
     },
+    category:{
+        type :String ,  default:"All"
+
+    },
     blogImage: {
         type: String,
         required: [true, "Please Select an Image"]
