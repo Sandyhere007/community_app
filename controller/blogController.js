@@ -93,7 +93,7 @@ export const myBlog = async(req,res)=>{
 export const category =async (req, res) =>{
   const {category} =req.query ;  // query params
  
-    const categories = await Blog.find({category:`${category}`});
+    const categories = await Blog.find({category:`${category}`})
 
     res.status(200).json(categories)
 }

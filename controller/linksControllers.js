@@ -30,7 +30,7 @@ export const createLink = async (req, res) => {
 
 export const allLinks = async (req, res, next) => {
     try {
-        const matched = await Links.find();
+        const matched = await Links.find().sort({title : 1});
         res.status(200).json(matched);
     } catch (error) {
         next(error)
