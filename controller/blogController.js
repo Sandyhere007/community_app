@@ -9,9 +9,15 @@ export const addBlog = async (req, res) => {
   //   unique_filename: false,
   //   overwrite: true,
   // };
+  if(!req.file) res.status(404).json({
+    success: false,
+    message: "Select a file first",
+  })
   const { originalname, filename } = req.file; 
+
  const result = cloudinary.v2.uploader.upload(req.file.path)
   const { title, summary, category, content ,author } = req.body;
+
  try {
   const blogData = await Blog.create({
     title : title,
@@ -26,11 +32,10 @@ export const addBlog = async (req, res) => {
     message: " BlogPost Created Successfully",
     data: blogData
   })
-  console.log({ blogData });
+ 
  } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Blog cannot be created",
     })
  }
 }
@@ -50,32 +55,43 @@ export const blogPost = async (req, res) => {
   const blogData = await Blog.findById(id).populate('author', ['username']);
   res.json(blogData);
 }
-export const updatePost = async (req, res) => {
-   const { originalname, filename } = req.file; 
-  const { title, summary, category, content ,author } = req.body;
- try {
-  const blogData = await Blog.create({
-    title : title,
-    summary : summary,
-    category : category,
-    blogImage: filename ? filename : res.data.blogImage ,
-    content : content,
-    author : author,
-  })
-  res.json({
-    success: true,
-    message: " BlogPost Updated Successfully",
-    data: blogData,
-  })
-  console.log({ blogData });
- } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Blog cannot be Updated",
-    })
- }
-}
 
+
+
+export const updatePost = async (req, res) => {
+    // const options = {
+    //   use_filename : true,
+    //   unique_filename: false,
+    //   overwrite: true,
+    // };
+    if(!req.file) res.status(404).json({
+      success: false,
+      message: "Select a file first",
+    })
+    const { originalname, filename } = req.file; 
+   const result = cloudinary.v2.uploader.upload(req.file.path)
+    const { title, summary, category, content ,author } = req.body;
+   try {
+    const blogData = await Blog.create({
+      title : title,
+      summary : summary,
+      category : category,
+      blogImage: (await result).secure_url,
+      content : content,
+      author : author,
+    })
+    res.json({
+      success: true,
+      message: " BlogPost Created Successfully",
+      data: blogData
+    })
+   
+   } catch (error) {
+      res.status(500).json({
+        success: false,
+      })
+   }
+  }
 
 export const myBlog = async(req,res)=>{
   const { id } =req.params;

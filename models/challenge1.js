@@ -12,34 +12,34 @@ const challengeSchema = mongoose.Schema({
         max : [100],
         min:[0],
     },
-    question1: {
+    question1: [{
         questionText: { type: String, required: true },
         tags: [{ type: String }],
         link1: { type: String },
         link2: { type: String },
         isComplete: { type: Boolean, default: false }
-    },
-    question2: {
+    }],
+    question2: [{
         questionText: { type: String, required: true },
         tags: [{ type: String }],
         link1: { type: String },
         link2: { type: String },
         isComplete: { type: Boolean, default: false }
-    },
-    question3: {
+    }],
+    question3: [{
         questionText: { type: String, required: true },
         tags: [{ type: String }],
         link1: { type: String },
         link2: { type: String },
         isComplete: { type: Boolean, default: false }
-    },
-    question4: {
+    }],
+    question4: [{
         questionText: { type: String, required: true },
         tags: [{ type: String }],
         link1: { type: String },
         link2: { type: String },
         isComplete: { type: Boolean, default: false }
-    }
+    }]
 });
 
 export const Challenge = mongoose.model("sdeChallenge1", challengeSchema);

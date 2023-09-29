@@ -31,3 +31,7 @@ export const all = async (req,res) => {
             res.status(500).json({ error: "Unable to fetch challenges from the database." });
         }
     };
+
+export const isComplete = async(req,res) =>{
+    // isComplete = !isComplete;
+}
