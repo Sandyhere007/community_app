@@ -45,7 +45,6 @@ export const allBlog = async(req, res) =>{
         await Blog.find()
           .populate('author', ['username'])
           .sort({createdAt: -1})
-          .limit(20)
       );
 } 
 
@@ -79,6 +78,7 @@ export const updatePost = async (req, res) => {
       blogImage: (await result).secure_url,
       content : content,
       author : author,
+      
     })
     res.json({
       success: true,
