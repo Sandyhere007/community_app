@@ -6,12 +6,13 @@ import { errorMiddleware } from "./middleware/errorHandler.js";
 import userRouter from "./routes/userRouter.js";
 import adminRouter from "./routes/adminRouter.js";
 import linksRouter from "./routes/linksRouter.js";
+import forumRouter from "./routes/forumRouter.js";
 import cookieParser from "cookie-parser";
+import blogRouter from "./routes/blogRouter.js";
 import cors from 'cors';
 import fs from 'fs';
 import path from "path";
 
-import blogRouter from "./routes/blogRouter.js";
 
 export const app = express();
 
@@ -36,6 +37,7 @@ app.use("/user", userRouter);
 app.use("/admin", adminRouter);
 app.use("/links", linksRouter);
 app.use("/blog", blogRouter)
+app.use("/forum", forumRouter)
 app.get("/", (req, res) => {
     res.send("BELIEVE IN YOURSELF KING");
 })

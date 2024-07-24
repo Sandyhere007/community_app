@@ -4,7 +4,7 @@ import { User } from "./user.js";
 const blogSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: [true, "Please Enter Summary"],
+        required: [true, "Please Enter Title"],
     },
     summary: {
         type: String,
